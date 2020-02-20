@@ -18,10 +18,7 @@ const TemplateItem = props => {
     if (Platform.OS === 'andorid' && Platform.Version >= 21) {
         TouchableCmp = TouchableNativeFeedback;
     }
-    const [selectedImage, setSelectedImage] = useState();
-    const imageTakenHandler = imagePath => {
-        setSelectedImage(imagePath);
-    };
+  
     return (
         <Card style={styles.TemplateItem}>
             <View style={styles.touchable} >
@@ -29,8 +26,9 @@ const TemplateItem = props => {
                     <View>
 
                         <View style={styles.imageContainer}>
-                            {/* <Image style={styles.image} source={{ uri: props.image }} /> */}
-                            <ImagePicker onImageTaken={imageTakenHandler}/>
+                            <Image style={styles.image} source={{ uri: props.image }} />
+                            {/* <ImagePicker onImageTaken={imageTakenHandler}/> */}
+                          
                         </View>
                        
                         <View style={styles.details}>

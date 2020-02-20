@@ -16,12 +16,10 @@ const IncomeDetailScreen = props => {
     //IncomeOverviewScreen is taking the incomeId using the useSelector 
     //which has the state=initialState : { all parameters for one income }
     //here, selectedIncome is finding the right id and is displaying only that data
-    const incomeId = props.navigation.getParam('incomeId');
-    const selectedIncome = useSelector(state => state.incomes.userIncomes.find(income => income.id === incomeId))
-    const [selectedImage, setSelectedImage] = useState();
-    const imageTakenHandler = imagePath => {
-        setSelectedImage(imagePath);
-    };
+    const inputId = props.navigation.getParam('inputId');
+    const selectedIncome = useSelector(state => state.inputs.inputs.find(input => input.id === inputId));
+  
+
     return (
         <ScrollView>
             <Image style={styles.image} source={{ uri: selectedIncome.imageURL }} />
@@ -35,7 +33,7 @@ const IncomeDetailScreen = props => {
 
 IncomeDetailScreen.navigationOptions = navData => {
     return {
-        headerTitle: navData.navigation.getParam('incomeName')
+        headerTitle: navData.navigation.getParam('inputName')
     };
 };
 const styles = StyleSheet.create({

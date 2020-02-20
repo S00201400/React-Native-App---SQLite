@@ -8,12 +8,12 @@ import { useScreens } from 'react-native-screens';
 import ReduxThunk from 'redux-thunk';
 import SensibleNavigator from '../React-Native-App/navigation/SensibleNavigator';
 
-import incomesReducer from '../React-Native-App/store/reducers/incomes';
+import inputReducer from '../React-Native-App/store/reducers/incomes';
 
 //this is how I can actually pass and access the data from the incomesReducer 
 //and also I can combine more than one
 const rootReducer = combineReducers({
-  incomes: incomesReducer
+  inputs: inputReducer
 });
 
 const store = createStore(rootReducer, applyMiddleware(ReduxThunk));

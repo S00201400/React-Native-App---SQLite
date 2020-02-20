@@ -10,7 +10,7 @@ const ImgPicker = props => {
 
     const verifyPermissions = async () => {
         //CAMERA_ROLL is for galery
-        const result = await Permissions.askAsync(Permissions.CAMERA, Permissions.CAMERA_ROLL);
+        const result = await Permissions.askAsync(Permissions.CAMERA_ROLL);
         if (result.status != 'granted') {
             Alert.alert('Insufficient permissions!', 'You need to grand camera permissions to use this app.',
                 [{ text: 'Okay' }]
@@ -32,19 +32,6 @@ const ImgPicker = props => {
             aspect: [16, 9],
             quality: 0.5
         });
-
-        // //moving the file 
-        // const fileName = image.split('/').pop();
-        // const newPath = FileSystem.documentDirectory + fileName;
-        // try {
-        //     await FileSystem.moveAsync({
-        //         from: image,
-        //         to: newPath
-        //     });
-        // } catch (err) {
-        //     console.log(err);
-        //     throw err;
-        // }
 
         // const resp = API(image);
         setPickedImage(image.uri);

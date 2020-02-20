@@ -22,9 +22,9 @@ export const init = () => {
     return promise;
 };
 
-export const insertInput=(name, imageURL, amount, description)=>{
+export const insertInput = (name, imageURL, amount,description) => {
     const promise = new Promise((resolve, reject) => {
-   
+
         db.transaction(tx => {
             tx.executeSql(
                 `INSERT INTO inputs (name, imageURL, amount, description) VALUES (?, ?, ?, ?);`,

@@ -9,7 +9,7 @@ export const ADD_INPUT = 'ADD_INPUT';
 export const SET_INPUTS = 'SET_INPUTS';
 
 
-export const addInput = (name, imageURL) => {
+export const addInput = (name, imageURL,amount, description) => {
   //, amount, description) => {
   return async dispatch => {
     const fileName = imageURL.split('/').pop();
@@ -24,12 +24,12 @@ export const addInput = (name, imageURL) => {
         name,
         newPath,
         12,
-        'Dummy'
-        // amount,
+        'jxkjx'
+        // +amount,
         // description
       );
       console.log(dbResult);
-      dispatch({ type: ADD_INPUT, inputData: { id: dbResult.insertId, name: name, imageURL: newPath } });
+      dispatch({ type: ADD_INPUT, inputData: { id: dbResult.insertId, name: name, imageURL: newPath, amount: amount, description:description} });
       //, amount: amount, description: description } });
     } catch (err) {
       console.log(err);

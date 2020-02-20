@@ -9,8 +9,8 @@ export default (state = initialState, action) => {
     case SET_INPUTS:
       return {
         inputs: action.inputs.map(
-          inp => new Input(inp.id.toString(), inp.name, inp.imageURL)
-          //, inp.amount.toString(), inp.description)
+          inp => new Input(inp.id.toString(), inp.name, inp.imageURL, inp.amount.toString(), inp.description )
+          //, inp.description)
         )
       };
     case ADD_INPUT:
@@ -18,9 +18,8 @@ export default (state = initialState, action) => {
         action.inputData.id.toString(),
         action.inputData.name,
         action.inputData.imageURL,
-        // action.inputData.amount.toString(),
-        // action.inputData.description,
-
+       action.inputData.amount.toString(),
+       action.inputData.description
       );
       return {
         inputs: state.inputs.concat(newInput)

@@ -37,8 +37,8 @@ const EditIncomeScreen = props => {
   // const [imageURL, setImageURL] = useState(editedInput ? editedInput.imageURL : '');
   
   const [selectedImage, setSelectedImage] = useState();
-  // const [amount, setAmount] = useState('');
-  // const [description, setDescription] = useState('');
+   const [amount, setAmount] = useState('');
+  const [description, setDescription] = useState('');
 
   const dispatch = useDispatch();
   const imageTakenHandler = imagePath => {
@@ -57,10 +57,10 @@ const EditIncomeScreen = props => {
     dispatch(
       inputsActions.addInput(
         nameVal,
-        selectedImage
+        selectedImage,
         // imageURL,
-        // +amount,
-        // description,
+       +amount,
+        description,
       )
     );
     props.navigation.goBack();
@@ -158,7 +158,7 @@ const EditIncomeScreen = props => {
         </View>
 
         {/*  this is for not allowing to edit the amount{editedIncome ? null : ( */}
-        {/* <View style={styles.formControl}>
+        <View style={styles.formControl}>
           <Text style={styles.label}>Amount</Text>
           <TextInput
             style={styles.input}
@@ -166,10 +166,10 @@ const EditIncomeScreen = props => {
             onChangeText={text => setAmount(text)}
             keyboardType='decimal-pad'
           />
-        </View> */}
+        </View>
         {/* )} */}
 
-        {/* <View style={styles.formControl}>
+        <View style={styles.formControl}>
           <Text style={styles.label}>Description</Text>
           <TextInput
             style={styles.input}
@@ -177,7 +177,7 @@ const EditIncomeScreen = props => {
             onChangeText={text => setDescription(text)}
             returnKeyType='done'
           />
-        </View> */}
+        </View>
 
         <Button
           title="Save Place"

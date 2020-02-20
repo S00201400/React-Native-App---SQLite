@@ -1,11 +1,11 @@
 class Input {
-    constructor(id, name,  imageURL) {
+    constructor(id, name,  imageURL, amount, description) {
         //, amount, description) {
         this.id = id;
         this.name = name;
         this.imageURL = imageURL;
-        // this.amount = amount;
-        // this.description = description;
+      this.amount = amount;
+        this.description = description;
         
      
     }

@@ -6,8 +6,8 @@
 import * as FileSystem from 'expo-file-system';
 
 export const ADD_INPUT = 'ADD_INPUT';
-
-export const addInput = (name, imageURL, description,amount) => {
+import { insertInput } from '../../helpers/db';
+export const addInput = (name, imageURL, amount, description) => {
   return async dispatch => {
     const fileName = imageURL.split('/').pop();
     const newPath = FileSystem.documentDirectory + fileName;
@@ -17,12 +17,20 @@ export const addInput = (name, imageURL, description,amount) => {
         from: imageURL,
         to: newPath
       });
+      const dbResult = await insertInput(
+        name,
+        newPath,
+        amount,
+        description
+      );
+      console.log(dbResult);
+      dispatch({ type: ADD_INPUT, inputData: { name: name, imageURL: newPath, amount: amount, description: description } });
     } catch (err) {
       console.log(err);
       throw err;
     }
 
-    dispatch({ type: ADD_INPUT, inputData: { name: name, imageURL: newPath, description: description, amount: amount } });
+
   };
 };
 
@@ -51,7 +59,7 @@ export const addInput = (name, imageURL, description,amount) => {
 //                         resData[key].amount
 //                     )
 //                 );
-          
+
 //             }
 
 

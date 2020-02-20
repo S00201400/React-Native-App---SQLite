@@ -35,9 +35,10 @@ const EditIncomeScreen = props => {
   const [name, setName] = useState('');
   // const [nameIsValid, setNameIsValid] = useState(false);
   // const [imageURL, setImageURL] = useState(editedInput ? editedInput.imageURL : '');
-  const [description, setDescription] = useState('');
-  const [amount, setAmount] = useState('');
+  
   const [selectedImage, setSelectedImage] = useState();
+  const [amount, setAmount] = useState('');
+  const [description, setDescription] = useState('');
 
   const imageTakenHandler = imagePath => {
     setSelectedImage(imagePath);
@@ -57,8 +58,8 @@ const EditIncomeScreen = props => {
         name,
         selectedImage,
         // imageURL,
+        +amount,
         description,
-        +amount
       )
     );
     props.navigation.goBack();

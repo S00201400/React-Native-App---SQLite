@@ -7,8 +7,18 @@ import { AppLoading } from 'expo';
 import { useScreens } from 'react-native-screens';
 import ReduxThunk from 'redux-thunk';
 import SensibleNavigator from '../React-Native-App/navigation/SensibleNavigator';
-
+import {init} from '../React-Native-App/helpers/db';
 import inputReducer from '../React-Native-App/store/reducers/incomes';
+
+init().then(()=>{
+  console.log('Init db');
+})
+.catch(err=>{
+  console.log('Init db failed');
+  console.log(err);
+});
+
+
 
 //this is how I can actually pass and access the data from the incomesReducer 
 //and also I can combine more than one

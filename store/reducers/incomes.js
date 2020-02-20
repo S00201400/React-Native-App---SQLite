@@ -22,8 +22,9 @@ export default (state = initialState, action) => {
                 'c1',
                 action.inputData.name,
                 action.inputData.imageURL,
+                action.inputData.amount,
                 action.inputData.description,
-                action.inputData.amount
+          
         );
         return {
           inputs: state.inputs.concat(newInput)

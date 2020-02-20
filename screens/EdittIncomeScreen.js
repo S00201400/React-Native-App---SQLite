@@ -29,17 +29,18 @@ const EditIncomeScreen = props => {
   // const editedInput = useSelector(state =>
   //   state.inputs.inputs.find(inc => inc.id === incId)
   // );
-  const dispatch = useDispatch();
+
   //if we have an id, we edit the income and we will have all the data in the inputs
   //if we don t have the id, we have an empty input
-  const [name, setName] = useState('');
+  const [nameVal, setName] = useState('');
   // const [nameIsValid, setNameIsValid] = useState(false);
   // const [imageURL, setImageURL] = useState(editedInput ? editedInput.imageURL : '');
   
   const [selectedImage, setSelectedImage] = useState();
-  const [amount, setAmount] = useState('');
-  const [description, setDescription] = useState('');
+  // const [amount, setAmount] = useState('');
+  // const [description, setDescription] = useState('');
 
+  const dispatch = useDispatch();
   const imageTakenHandler = imagePath => {
     setSelectedImage(imagePath);
   };
@@ -55,11 +56,11 @@ const EditIncomeScreen = props => {
   const submitHandler = () => {
     dispatch(
       inputsActions.addInput(
-        name,
-        selectedImage,
+        nameVal,
+        selectedImage
         // imageURL,
-        +amount,
-        description,
+        // +amount,
+        // description,
       )
     );
     props.navigation.goBack();
@@ -132,7 +133,7 @@ const EditIncomeScreen = props => {
 
           <TextInput
             style={styles.input}
-            value={name}
+            value={nameVal}
             onChangeText={nameChangeHandler}
             keyboardType='default'
             autoCapitalize='sentences'
@@ -157,7 +158,7 @@ const EditIncomeScreen = props => {
         </View>
 
         {/*  this is for not allowing to edit the amount{editedIncome ? null : ( */}
-        <View style={styles.formControl}>
+        {/* <View style={styles.formControl}>
           <Text style={styles.label}>Amount</Text>
           <TextInput
             style={styles.input}
@@ -165,10 +166,10 @@ const EditIncomeScreen = props => {
             onChangeText={text => setAmount(text)}
             keyboardType='decimal-pad'
           />
-        </View>
+        </View> */}
         {/* )} */}
 
-        <View style={styles.formControl}>
+        {/* <View style={styles.formControl}>
           <Text style={styles.label}>Description</Text>
           <TextInput
             style={styles.input}
@@ -176,7 +177,7 @@ const EditIncomeScreen = props => {
             onChangeText={text => setDescription(text)}
             returnKeyType='done'
           />
-        </View>
+        </View> */}
 
         <Button
           title="Save Place"

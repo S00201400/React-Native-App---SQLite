@@ -24,11 +24,31 @@ export const init = () => {
 
 export const insertInput=(name, imageURL, amount, description)=>{
     const promise = new Promise((resolve, reject) => {
-        //creaeting the tabel if doesn t exist
+   
         db.transaction(tx => {
             tx.executeSql(
                 `INSERT INTO inputs (name, imageURL, amount, description) VALUES (?, ?, ?, ?);`,
                 [name, imageURL, amount, description],
+                (_, result) => {
+                    resolve(result); //success case
+                },
+                (_, err) => {
+                    reject(err);
+                }
+            );
+        });
+    });
+    return promise;
+};
+
+export const fetchInputs = () => {
+    const promise = new Promise((resolve, reject) => {
+        //creaeting the tabel if doesn t exist
+        db.transaction(tx => {
+            tx.executeSql(
+                //here you can put a where to select exact what you want
+                'SELECT * FROM inputs',
+                [],
                 (_, result) => {
                     resolve(result); //success case
                 },

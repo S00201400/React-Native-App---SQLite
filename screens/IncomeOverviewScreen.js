@@ -5,7 +5,7 @@ import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import TemplateItem from '../components/features/TemplateItem';
 import HeaderButton from '../components/UI/MyHeaderButton';
 import Colors from '../constants/colors';
-import * as IncomesActions from '../store/actions/incomes';
+import * as InputsActions from '../store/actions/incomes';
 import { loadAsync } from 'expo-font';
 
 const IncomeOverviewScreen = props => {
@@ -15,9 +15,10 @@ const IncomeOverviewScreen = props => {
   //IncomeOverviewScreen is taking the data that is in userIncomes 
   //using the useSelector which has the state=initialState : { all parameters for income }
   const inputs = useSelector(state => state.inputs.inputs)
-
-  // const dispatch = useDispatch();
-
+  const dispatch = useDispatch();
+  useEffect(()=>{
+    dispatch(InputsActions.loadInputs());
+  },[dispatch]);
 //   const loadIncomes = useCallback(async () => {
 //     setError(null);
 //     setIsRefreshing(true);

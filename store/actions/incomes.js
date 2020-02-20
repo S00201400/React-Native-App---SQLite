@@ -4,10 +4,13 @@
 // export const UPDATE_INCOME = "UPDATE_INCOME";
 // export const SET_INCOMES = "SET_INCOMES"; // for taking my data from db, storying in set income and place it into my store after
 import * as FileSystem from 'expo-file-system';
-
+import { insertInput, fetchInputs } from '../../helpers/db';
 export const ADD_INPUT = 'ADD_INPUT';
-import { insertInput } from '../../helpers/db';
-export const addInput = (name, imageURL, amount, description) => {
+export const SET_INPUTS = 'SET_INPUTS';
+
+
+export const addInput = (name, imageURL) => {
+  //, amount, description) => {
   return async dispatch => {
     const fileName = imageURL.split('/').pop();
     const newPath = FileSystem.documentDirectory + fileName;
@@ -20,13 +23,30 @@ export const addInput = (name, imageURL, amount, description) => {
       const dbResult = await insertInput(
         name,
         newPath,
-        amount,
-        description
+        12,
+        'Dummy'
+        // amount,
+        // description
       );
       console.log(dbResult);
-      dispatch({ type: ADD_INPUT, inputData: { name: name, imageURL: newPath, amount: amount, description: description } });
+      dispatch({ type: ADD_INPUT, inputData: { id: dbResult.insertId, name: name, imageURL: newPath } });
+      //, amount: amount, description: description } });
     } catch (err) {
       console.log(err);
+      throw err;
+    }
+
+
+  };
+};
+
+export const loadInputs = () => {
+  return async dispatch => {
+    try {
+      const dbResult = await fetchInputs();
+      console.log(dbResult);
+      dispatch({ type: SET_INPUTS, inputs: dbResult.rows._array });
+    } catch (err) {
       throw err;
     }
 

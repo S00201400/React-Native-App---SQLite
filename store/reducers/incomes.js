@@ -1,38 +1,34 @@
-//importing the dummy data for testing
-//import INCOMES from '../../data/dummy-data';
-import {ADD_INPUT, DELETE_INCOME, CREATE_INCOME, UPDATE_INCOME, SET_INCOMES } from '../actions/incomes';
-// import Income from '../../models/income';
-// import Expense from '../../models/expense';
+import { ADD_INPUT, SET_INPUTS} from '../actions/incomes';
 import Input from '../../models/input';
-//initialState can have more data. Using the state.userIncomes for exemple
-//we are accessing the data from userIncomes, but insted we can have userExpenses
-//and we can access that data in the same way
 const initialState = {
-    // userIncomes: INCOMES
-    // userIncomes: INCOMES.filter(incomes => incomes.userID === 'c1'),
-    // userExpenses: INCOMES.filter(expenses => expenses.userID === 'c3')
-    inputs: []
+  inputs: []
 };
 
 export default (state = initialState, action) => {
-    switch (action.type) {
-      case ADD_INPUT:
-        const newInput = new Input(
-                action.inputData.id,
-                'c1',
-                action.inputData.name,
-                action.inputData.imageURL,
-                action.inputData.amount,
-                action.inputData.description,
-          
-        );
-        return {
-          inputs: state.inputs.concat(newInput)
-        };
-      default:
-        return state;
-    }
-  };
+  switch (action.type) {
+    case SET_INPUTS:
+      return {
+        inputs: action.inputs.map(
+          inp => new Input(inp.id.toString(), inp.name, inp.imageURL)
+          //, inp.amount.toString(), inp.description)
+        )
+      };
+    case ADD_INPUT:
+      const newInput = new Input(
+        action.inputData.id.toString(),
+        action.inputData.name,
+        action.inputData.imageURL,
+        // action.inputData.amount.toString(),
+        // action.inputData.description,
+
+      );
+      return {
+        inputs: state.inputs.concat(newInput)
+      };
+    default:
+      return state;
+  }
+};
 
 // export default (state = initialState, action) => {
 //     switch (action.type) {
@@ -73,7 +69,7 @@ export default (state = initialState, action) => {
 //                 )
 //             };
 //         case UPDATE_INCOME:
-            
+
 //             const incomeIndex = state.userIncomes.findIndex(
 //                 inc => inc.id === action.iid
 //             );
@@ -88,7 +84,7 @@ export default (state = initialState, action) => {
 //             const updatedUserIncomes = [...state.userIncomes]; //this is the original array
 //             updatedUserIncomes[incomeIndex] = updatedIncome; //i am changing in the copy with the updated array
 
-       
+
 //             const expenseIndex = state.userExpenses.findIndex(
 //                 exp => exp.id === action.iid
 //             );
@@ -106,12 +102,12 @@ export default (state = initialState, action) => {
 
 //             const updatedUserExpenses = [...state.userExpenses];
 //             updatedUserExpenses[expenseIndex] = updatedIncome;
-        
+
 //             return {
 //                 ...state, //copying the existing one
 //                 userExpenses: updatedUserExpenses,
 //                 userIncomes: updatedUserIncomes
-            
+
 //             };
 //         case DELETE_INCOME:
 //             return {

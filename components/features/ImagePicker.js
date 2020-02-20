@@ -11,7 +11,7 @@ const ImgPicker = props => {
     const verifyPermissions = async () => {
         //CAMERA_ROLL is for galery
         const result = await Permissions.askAsync(Permissions.CAMERA_ROLL);
-        if (result.status != 'granted') {
+        if (result.status !== 'granted') {
             Alert.alert('Insufficient permissions!', 'You need to grand camera permissions to use this app.',
                 [{ text: 'Okay' }]
             );

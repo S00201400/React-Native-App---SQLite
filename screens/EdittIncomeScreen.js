@@ -164,7 +164,7 @@ const EditIncomeScreen = props => {
             style={styles.input}
             value={amount}
             onChangeText={text => setAmount(text)}
-            keyboardType='decimal-pad'
+            keyboardType='default'
           />
         </View>
         {/* )} */}

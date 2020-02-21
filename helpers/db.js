@@ -70,8 +70,23 @@ export const deleteInput = (id) => {
                 [id]
                 ,
                 (_, result) => {
-                    resolve(result); //success case
-                },
+                   // resolve(result); //success case
+                    if (results.rowsAffected < 0) {
+                        Alert.alert(
+                          'Success',
+                          'User deleted successfully',
+                          [
+                            {
+                              text: 'Ok',
+                            },
+                          ],
+                          { cancelable: false }
+                        );
+                      } else {
+                        alert('Try again!');
+                      }
+                    }
+                ,
                 (_, err) => {
                     reject(err);
                 }

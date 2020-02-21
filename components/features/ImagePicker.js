@@ -72,7 +72,10 @@ const styles = StyleSheet.create({
         borderColor: '#ccc',
         borderWidth: 1
     },
-    image: {}
+    image: {
+        width: "100%",
+        height: 200
+    }
 });
 
 export default ImgPicker;

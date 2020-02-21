@@ -23,8 +23,8 @@ const IncomeDetailScreen = props => {
     return (
         <ScrollView>
             <Image style={styles.image} source={{ uri: selectedIncome.imageURL }} />
-             <Text style={styles.amount}>${selectedIncome.amount}</Text>
-             {/* <Text style={styles.amount}>${parseFloat(props.amount).toFixed(2)}</Text>  */}
+             {/* <Text style={styles.amount}>€{selectedIncome.amount}</Text> */}
+             <Text style={styles.amount}>€{parseFloat(selectedIncome.amount).toFixed(2)}</Text>
             <Text style={styles.description}>{selectedIncome.description}</Text> 
         </ScrollView>
     );

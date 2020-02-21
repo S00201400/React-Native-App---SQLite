@@ -7,10 +7,11 @@ import * as FileSystem from 'expo-file-system';
 import { insertInput, fetchInputs } from '../../helpers/db';
 export const ADD_INPUT = 'ADD_INPUT';
 export const SET_INPUTS = 'SET_INPUTS';
+export const DELETE_INPUT = 'DELETE_INPUT';
 
 
 export const addInput = (name, imageURL,amount, description) => {
-  //, amount, description) => {
+ //movin the picture
   return async dispatch => {
     const fileName = imageURL.split('/').pop();
     const newPath = FileSystem.documentDirectory + fileName;
@@ -20,17 +21,18 @@ export const addInput = (name, imageURL,amount, description) => {
         from: imageURL,
         to: newPath
       });
+
+
       const dbResult = await insertInput(
         name,
         newPath,
-        12,
-        'jxkjx'
-        // +amount,
-        // description
+       // 12,
+       // 'jxkjx'
+         +amount,
+         description
       );
       console.log(dbResult);
       dispatch({ type: ADD_INPUT, inputData: { id: dbResult.insertId, name: name, imageURL: newPath, amount: amount, description:description} });
-      //, amount: amount, description: description } });
     } catch (err) {
       console.log(err);
       throw err;
@@ -51,6 +53,19 @@ export const loadInputs = () => {
     }
 
 
+  };
+};
+
+export const deleteInput = (id) => {
+  return async dispatch => {
+    try {
+      const dbResult = await deleteInput(id);
+      console.log(dbResult);
+      dispatch({ type: DELETE_INPUT, id: id});
+    
+    } catch (err) {
+      throw err;
+    }
   };
 };
 

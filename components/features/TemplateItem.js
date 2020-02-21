@@ -33,8 +33,8 @@ const TemplateItem = props => {
                        
                         <View style={styles.details}>
                             <Text style={styles.name}>{props.name}</Text>
-                            {/* <Text style={styles.amount}>${parseFloat(props.amount).toFixed(2)}</Text> */}
-                            <Text style={styles.amount}>${props.amount}</Text>
+                            <Text style={styles.amount}>€{parseFloat(props.amount).toFixed(2)}</Text>
+                            {/* <Text style={styles.amount}>€{props.amount}</Text> */}
                         </View>
                         <View style={styles.actions}>
                             {props.children}

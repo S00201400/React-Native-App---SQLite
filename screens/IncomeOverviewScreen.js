@@ -7,28 +7,33 @@ import HeaderButton from '../components/UI/MyHeaderButton';
 import Colors from '../constants/colors';
 import * as InputsActions from '../store/actions/incomes';
 import { loadAsync } from 'expo-font';
+import { deleteInput } from '../helpers/db';
 
 const IncomeOverviewScreen = props => {
+
+
+  
   // const [isRefreshing, setIsRefreshing]= useState(false);
   // const [error, setError] = useState(false);
   // const [isLoading, setIsLoading] = useState();
   //IncomeOverviewScreen is taking the data that is in userIncomes 
   //using the useSelector which has the state=initialState : { all parameters for income }
   const inputs = useSelector(state => state.inputs.inputs)
+
   const dispatch = useDispatch();
-  useEffect(()=>{
+  useEffect(() => {
     dispatch(InputsActions.loadInputs());
-  },[dispatch]);
-//   const loadIncomes = useCallback(async () => {
-//     setError(null);
-//     setIsRefreshing(true);
-//     try {
-//       await dispatch(IncomesActions.fetchIncomes());
-//     } catch (err) {
-//       setError(err.message);
-//     }
-//  setIsRefreshing(false);
-//   }, [dispatch, setIsLoading, setError]);
+  }, [dispatch]);
+  //   const loadIncomes = useCallback(async () => {
+  //     setError(null);
+  //     setIsRefreshing(true);
+  //     try {
+  //       await dispatch(IncomesActions.fetchIncomes());
+  //     } catch (err) {
+  //       setError(err.message);
+  //     }
+  //  setIsRefreshing(false);
+  //   }, [dispatch, setIsLoading, setError]);
 
   //willFocus fire when the transition beginns
   //we should consider this because you want yo load everyting form your db each time
@@ -54,26 +59,26 @@ const IncomeOverviewScreen = props => {
   //   }
   // }, [error]);
 
-  // const deleteHandler = (id) => {
-  //   Alert.alert("Are you sure?", "Do you really want to delete this item?", [
-  //     { text: 'No', style: 'default' },
-  //     {
-  //       text: 'Yes', style: 'destructive', onPress: async () => {
-  //         setError(null);
-  //         setIsLoading(true);
-  //         try {
-  //           await dispatch(IncomesActions.deleteIncome(id));
-  //           props.navigation.goBack();
-  //         } catch (err) {
-  //           setError(err.message);
-  //         }
+  const deleteHandler = (id) => {
+    Alert.alert("Are you sure?", "Do you really want to delete this item?", [
+      { text: 'No', style: 'default' },
+      {
+        text: 'Yes', style: 'destructive', onPress: async () => {
+          // setError(null);
+          //    setIsLoading(true);
+          // try {
+          await dispatch(InputsActions.deleteInput(id));
+          props.navigation.goBack();
+          // } catch (err) {
+          //  setError(err.message);
+          // }
 
-  //         setIsLoading(false);
+          //setIsLoading(false);
 
-  //       }
-  //     }
-  //   ]);
-  // };
+        }
+      }
+    ]);
+  };
 
   const selectItemHandler = (id, name) => {
     props.navigation.navigate('IncomeDetail', {
@@ -135,12 +140,12 @@ const IncomeOverviewScreen = props => {
           onPress={() => {
             editIncomeHandler(itemData.item.id);
           }}
-        />
+        /> */}
         <Button
           color={Colors.primary}
           title="Delete"
           onPress={deleteHandler.bind(this, itemData.item.id)}
-        /> */}
+        />
       </TemplateItem>
     }
   />;

@@ -5,9 +5,11 @@
 // export const SET_INCOMES = "SET_INCOMES"; // for taking my data from db, storying in set income and place it into my store after
 import * as FileSystem from 'expo-file-system';
 import { insertInput, fetchInputs } from '../../helpers/db';
+import getTextFromImage from '../../components/features/GetTextFromImage';
 export const ADD_INPUT = 'ADD_INPUT';
 export const SET_INPUTS = 'SET_INPUTS';
 export const DELETE_INPUT = 'DELETE_INPUT';
+
 
 
 export const addInput = (name, imageURL,amount, description) => {
@@ -22,7 +24,8 @@ export const addInput = (name, imageURL,amount, description) => {
         to: newPath
       });
 
-
+      //getTextFromImage(newPath);
+      //console.log(amount);
       const dbResult = await insertInput(
         name,
         newPath,

@@ -34,10 +34,10 @@ const ImgPicker = props => {
             quality: 0.5
         });
 
-        // const resp = API(image);
+       // const resp = API(image.uri);
         setPickedImage(image.uri);
         props.onImageTaken(image.uri);
-
+      //  getTextFromImage(image.uri);
 
     };
 
@@ -45,7 +45,7 @@ const ImgPicker = props => {
         <View style={styles.imagePicker}>
             <View style={styles.imagePreview}>
                 {!pickedImage ? (
-                    <Text>No image picked yet.</Text>
+                    <Text>Take a picture of your total price.</Text>
                 ) : (
                         <Image style={styles.image} source={{ uri: pickedImage }} />
                     )}

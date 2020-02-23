@@ -4,6 +4,7 @@ import Colors from '../../constants/colors';
 import * as ImagePicker from 'expo-image-picker';
 import * as Permissions from 'expo-permissions';
 import * as FileSystem from 'expo-file-system';
+
 const ImgPicker = props => {
 
     const [pickedImage, setPickedImage] = useState();

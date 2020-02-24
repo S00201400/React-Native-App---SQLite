@@ -11,6 +11,7 @@ import { Ionicons } from '@expo/vector-icons';
 import IncomeOverviewScreen from '../screens/IncomeOverviewScreen';
 import IncomeDetailScreen from '../screens/IncomeDetailScreen';
 import EditIncomeScreen from '../screens/EdittIncomeScreen';
+import HomeScreen from '../screens/HomeScreen';
 
 
 const defaultNavOptions = {
@@ -30,6 +31,7 @@ const defaultNavOptions = {
 const InputsNavigator = createStackNavigator(
   {
     //the first screen written here is always the first screen that we see
+    Home: HomeScreen,
     IncomeOverview: IncomeOverviewScreen,
     IncomeDetail: IncomeDetailScreen,
     EditIncome: EditIncomeScreen,

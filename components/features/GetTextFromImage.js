@@ -1,4 +1,4 @@
-import processResult from "../features/ProcessResult";
+import processResult from "./ProcessResult";
 
 async function getTextFromImage(imagePath) {
     var data = new FormData();
@@ -32,4 +32,4 @@ async function getTextFromImage(imagePath) {
     xhr.send(data); //trimite
 }
 
-export default getTextFromImage;
+export default getTextFromImage

@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import {
   View,
   ScrollView,
+  FlatList,
   Text,
   TextInput,
   StyleSheet,
@@ -18,17 +19,17 @@ import Colors from '../constants/colors';
 import ImagePicker from '../components/features/ImagePicker';
 
 const EditIncomeScreen = props => {
-  // const [isLoading, setIsLoading] = useState(false);
-  // const [error, setError] = useState();
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState();
   //i am getting saving the id in incId
-  // const incId = props.navigation.getParam('inputId');
+  const incId = props.navigation.getParam('inputId');
 
   //we can get our eddited incomes using the reducer slices userIncomes and checking for 
   //the id being equal with the one that we get
   //if is null, it means we want to add a new income
-  // const editedInput = useSelector(state =>
-  //   state.inputs.inputs.find(inc => inc.id === incId)
-  // );
+  const editedInput = useSelector(state =>
+    state.inputs.inputs.find(inc => inc.id === incId)
+  );
 
   //if we have an id, we edit the income and we will have all the data in the inputs
   //if we don t have the id, we have an empty input
@@ -45,83 +46,81 @@ const EditIncomeScreen = props => {
     setSelectedImage(imagePath);
   };
 
-  // useEffect(() => {
-  //   if (error) {
-  //     Alert.alert('An error occurred!', error, [{ text: 'Okay' }]);
-  //   }
-  // }, [error]);
+  useEffect(() => {
+    if (error) {
+      Alert.alert('An error occurred!', error, [{ text: 'Okay' }]);
+    }
+  }, [error]);
 
   //here i should have some changes for the validation part
   //this is validation only for the name
-  const submitHandler = () => {
-    dispatch(
-      inputsActions.addInput(
-        nameVal,
-        selectedImage,
-        // imageURL,
-       +amount,
-        description,
-      )
-    );
-    props.navigation.goBack();
-  };
-  // if (!nameIsValid) {
-  //   Alert.alert('Wrong input', 'Please check the errors', [{ text: 'okay' }])
-  //   return;
-  // }
-  // setError(null);
-  // setIsLoading(true);
-  // try {
-  //   if (editedInput) {
-  //     await dispatch(
-  //     //here should be update
+
+
+
+  //code new
+  const submitHandler = useCallback(async () => {
+    if (!nameVal) {
+      Alert.alert('Wrong input', 'Please check the errors', [{ text: 'okay' }])
+      return;
+    }
+    setError(null);
+    setIsLoading(true);
+        dispatch(
+          inputsActions.addInput(
+            nameVal,
+            selectedImage,
+            // imageURL,
+           +amount,
+            description,
+          )
+        );
+        props.navigation.goBack();
+
+
+    setIsLoading(false);
+  }, [dispatch, incId, nameVal, selectedImage, description, amount]);
+
+
+  //new
+
+  //the good one 
+  // const submitHandler = () => {
+  //   dispatch(
   //     inputsActions.addInput(
-  //       incId,
-  //       name,
+  //       nameVal,
   //       selectedImage,
+  //       // imageURL,
+  //      +amount,
   //       description,
-  //       +amount
   //     )
   //   );
-  // }
-  // else {
-  // await 
+  //   props.navigation.goBack();
+  // };
+  //this is the good one
+ 
 
-  //}
-  //after add or edit, goBack to the last screen
-
-  // } catch (err) {
-  //   setError(err.message);
-  // }
-
-  // setIsLoading(false);
-
-  // }, [dispatch, incId, name, imageURL, description, amount]);
-  //}, [dispatch, incId, name, selectedImage, description, amount]);
-
-
-  // useEffect(() => {
-  //   props.navigation.setParams({ submit: submitHandler });
-  // }, [submitHandler]);
+    useEffect(() => {
+      props.navigation.setParams({ submit: submitHandler });
+    }, [submitHandler]);
 
   const nameChangeHandler = text => {
-    // if (text.trim().length === 0) {
-    //   setNameIsValid(false);
-    // } else {
-    //   setNameIsValid(true);
-    // }
+    if (text.trim().length === 0) {
+      setName(false);
+    } else {
+      setName(true);
+    }
     setName(text);
   };
 
 
   //spinner for loading 
-  // if (isLoading) {
-  //   return (
-  //     < View style={styles.centered} >
-  //       <ActivityIndicator size='large' color={Colors.primary} />
-  //     </View >
-  //   );
-  // }
+  if (isLoading) {
+    return (
+      < View style={styles.centered} >
+        <ActivityIndicator size='large' color={Colors.primary} />
+      </View >
+    );
+  }
 
   return (
     <ScrollView>
@@ -141,7 +140,7 @@ const EditIncomeScreen = props => {
             returnKeyType='next'
 
           />
-          {/* {!nameIsValid && <Text>Please enter a valid text</Text>} */}
+          {!nameVal && <Text>Please enter a valid text</Text>}
         </View>
 
         <View style={styles.formControl}>
@@ -179,11 +178,11 @@ const EditIncomeScreen = props => {
           />
         </View>
 
-        <Button
+        {/* <Button
           title="Save Place"
           color={Colors.primary}
           onPress={submitHandler}
-        />
+        /> */}
       </View>
 
     </ScrollView>
@@ -191,25 +190,24 @@ const EditIncomeScreen = props => {
 };
 
 //submit button
-EditIncomeScreen.navigationOptions ={
-//= navData => {
-  //const submitFn = navData.navigation.getParam('submit');
- // return {
+EditIncomeScreen.navigationOptions = navData => {
+  const submitFn = navData.navigation.getParam('submit');
+ return {
     //if our function is passed with the id, means that we are in edit, if not it means that we want to add a new income
     headerTitle: 'Add Income'
-    // ,
-    // headerRight: () =>
-    //   <HeaderButtons HeaderButtonComponent={HeaderButton}>
-    //     <Item
-    //       title="Save"
-    //       iconName={
-    //         Platform.OS === 'android' ? 'md-checkmark' : 'ios-checkmark'
-    //       }
-    //       onPress={submitFn}
-    //     />
-    //   </HeaderButtons>
+    ,
+    headerRight: () =>
+      <HeaderButtons HeaderButtonComponent={HeaderButton}>
+        <Item
+          title="Save"
+          iconName={
+            Platform.OS === 'android' ? 'md-checkmark' : 'ios-checkmark'
+          }
+          onPress={submitFn}
+        />
+      </HeaderButtons>
 
- // };
+ };
 };
 
 const styles = StyleSheet.create({

@@ -17,7 +17,7 @@ import HeaderButton from '../components/UI/MyHeaderButton';
 import * as inputsActions from '../store/actions/incomes';
 import Colors from '../constants/colors';
 import ImagePicker from '../components/features/ImagePicker';
-
+import LocationPicker from '../components/features/LocationPicker';
 const EditIncomeScreen = props => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState();
@@ -153,7 +153,8 @@ const EditIncomeScreen = props => {
             returnKeyType='next'
           /> */}
           <ImagePicker onImageTaken={imageTakenHandler} />
-
+          <Text style={styles.label}>Location</Text>
+          <LocationPicker />
         </View>
 
         {/*  this is for not allowing to edit the amount{editedIncome ? null : ( */}

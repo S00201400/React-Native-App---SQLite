@@ -154,7 +154,7 @@ const EditIncomeScreen = props => {
           /> */}
           <ImagePicker onImageTaken={imageTakenHandler} />
           <Text style={styles.label}>Location</Text>
-          <LocationPicker />
+          <LocationPicker navigation={props.navigation} />
         </View>
 
         {/*  this is for not allowing to edit the amount{editedIncome ? null : ( */}

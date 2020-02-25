@@ -12,7 +12,7 @@ import IncomeOverviewScreen from '../screens/IncomeOverviewScreen';
 import IncomeDetailScreen from '../screens/IncomeDetailScreen';
 import EditIncomeScreen from '../screens/EdittIncomeScreen';
 import HomeScreen from '../screens/HomeScreen';
-
+import MapScreen from '../screens/MapScreen';
 
 const defaultNavOptions = {
   headerStyle: {
@@ -35,6 +35,7 @@ const InputsNavigator = createStackNavigator(
     IncomeOverview: IncomeOverviewScreen,
     IncomeDetail: IncomeDetailScreen,
     EditIncome: EditIncomeScreen,
+    Map: MapScreen
 
   },
   {

@@ -1,18 +1,21 @@
 function processResult(rawPrediction) {
     var regexForNumbers = /[+-]?\d+(\.\d+)?/g; 
-    //pattern imi intoarce numerele
+    //This Pattern is returning the numbers
     var regexForExtractingStrings = /(?="ocr_text")(.*)(?=")/g; 
-    //imi intoarce ce est eintre ocr test si ultimele ghilimele
+    //This Pattern is returning everything bewtween the quotes for ocr-text
     var newString = rawPrediction.match(regexForExtractingStrings).toString(); 
-    //cand ii dau match imi ia patternul si imi reconstruieste stringul
-   //in string am doar ocr..si scoate restul 
+    //rawPrediction is my JSON Response. I compare it and my newString will have
+    //only OCR-TEXT : ....
+
     console.log(newString);
+
+    //match()	Returns an array containing all of the matches
     var floats = newString.match(regexForNumbers).map(function(v) { return parseFloat(v); });
-    //map aplica o functie pe toate elementele si dau return 
-    //deci map intra in fiecare in parte si se uita 
+    //Map is appling the function over all the elements and is returning the numbers.
+
     console.log(floats);
+    //Taking the max number which represents the Total Price
     return Math.max(...floats); 
-    // il caut pe ala maxim 
 }
 
 export default processResult

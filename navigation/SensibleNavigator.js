@@ -31,7 +31,7 @@ const defaultNavOptions = {
 const InputsNavigator = createStackNavigator(
   {
     //the first screen written here is always the first screen that we see
-   // Home: HomeScreen,
+    Home: HomeScreen,
     IncomeOverview: IncomeOverviewScreen,
     IncomeDetail: IncomeDetailScreen,
     EditIncome: EditIncomeScreen,

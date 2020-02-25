@@ -23,19 +23,19 @@ export const addInput = (name, imageURL,amount, description) => {
         from: imageURL,
         to: newPath
       });
-     //getTextFromImage(newPath);
+     const result = await getTextFromImage(name,description,newPath);
      //male to func
-
-      const dbResult = await insertInput(
-        name,
-        newPath,
-       // 12,
-       // 'jxkjx'
-         +amount,
-         description
-      );
-      console.log(dbResult);
-      dispatch({ type: ADD_INPUT, inputData: { id: dbResult.insertId, name: name, imageURL: newPath, amount: amount, description:description} });
+      // amount = await result.result;
+      // const dbResult = await insertInput(
+      //   name,
+      //   newPath,
+      //  // 12,
+      //  // 'jxkjx'
+      //    amount,
+      //    description
+      // );
+      // console.log(dbResult);
+      // dispatch({ type: ADD_INPUT, inputData: { id: dbResult.insertId, name: name, imageURL: newPath, amount: amount, description:description} });
     } catch (err) {
       console.log(err);
       throw err;

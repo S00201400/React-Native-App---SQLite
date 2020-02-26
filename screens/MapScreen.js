@@ -11,15 +11,22 @@ import Colors from '../constants/colors';
 
 
 const MapScreen = props => {
-    const [selectedLocation, setSelectedLocation] = useState();
+
+    const initialLocation = props.navigation.getParam('initialLocation');
+    const readonly = props.navigation.getParam('readonly');
+    const [selectedLocation, setSelectedLocation] = useState(initialLocation);
     //object that tells where to render
     const mapRegion = {
-        latitude: 37.78,
-        longitude: -122.43,
+        latitude: initialLocation ? initialLocation.lat : 54.26969,
+        longitude: initialLocation ? initialLocation.lng : -8.46943,
         latitudeDelta: 0.0922,
         longitudeDelta: 0.0421
     };
     const selectLocationHandler = event => {
+        //if this is true, i don t return a new location
+        if (readonly) {
+            return;
+        }
         setSelectedLocation({
             lat: event.nativeEvent.coordinate.latitude,
             lng: event.nativeEvent.coordinate.longitude
@@ -62,6 +69,11 @@ const MapScreen = props => {
 
 MapScreen.navigationOptions = navData => {
     const saveFn = navData.navigation.getParam('saveLocation');
+    //i extract readonly with the help of props getParam
+    const readonly = navData.navigation.getParam('readonly');
+    if (readonly) {
+        return {};
+    }
     return {
         headerRight: (
             <TouchableOpacity style={styles.headerButton} onPress={saveFn}>

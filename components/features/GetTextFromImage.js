@@ -3,7 +3,7 @@ import { insertInput } from '../../helpers/db';
 
 //This function is expecting the imagePath and using FormData object lets you compile a 
 //set of value pairs to send using XMLHttpRequest. 
-async function getTextFromImage(name, imagePath, address, description) {
+async function getTextFromImage(name, imagePath, address, description,lat,lng) {
     var data = new FormData();
     data.append('file', {
         uri: imagePath,
@@ -31,14 +31,16 @@ async function getTextFromImage(name, imagePath, address, description) {
                 imagePath,
                 address,
                 result,
-                description
+                description,
+                lat,
+                lng
             );
             console.log(dbResult);
             ({
                 type: ADD_INPUT, inputData:
                 {
                     id: dbResult.insertId, name: name,
-                    imageURL: imagePath, address: address, amount: result, description: description
+                    imageURL: imagePath, address: address, amount: result, description: description, lat: lat, lng: lng
                 }
             });
         }

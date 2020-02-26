@@ -45,7 +45,7 @@ export const addInput = (name, imageURL, location, amount, description) => {
         from: imageURL,
         to: newPath
       });
-      const result = await getTextFromImage(name, newPath, address, description);
+      const result = await getTextFromImage(name, newPath, address, description,lat,lng);
       //male to func
       // amount = await result.result;
       // const dbResult = await insertInput(

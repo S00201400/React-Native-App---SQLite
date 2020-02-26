@@ -36,9 +36,9 @@ const EditIncomeScreen = props => {
   const [nameVal, setName] = useState('');
   // const [nameIsValid, setNameIsValid] = useState(false);
   // const [imageURL, setImageURL] = useState(editedInput ? editedInput.imageURL : '');
-  
+  const [selectedLocation, setSelectedLocation] = useState();
   const [selectedImage, setSelectedImage] = useState();
-   const [amount, setAmount] = useState('');
+  const [amount, setAmount] = useState('');
   const [description, setDescription] = useState('');
 
   const dispatch = useDispatch();
@@ -55,7 +55,9 @@ const EditIncomeScreen = props => {
   //here i should have some changes for the validation part
   //this is validation only for the name
 
-
+  const locationPickedHandler = useCallback(location => {
+    setSelectedLocation(location);
+  }, []);
 
   //code new
   const submitHandler = useCallback(async () => {
@@ -65,20 +67,21 @@ const EditIncomeScreen = props => {
     }
     setError(null);
     setIsLoading(true);
-        dispatch(
-          inputsActions.addInput(
-            nameVal,
-            selectedImage,
-            // imageURL,
-           +amount,
-            description,
-          )
-        );
-        props.navigation.goBack();
+    dispatch(
+      inputsActions.addInput(
+        nameVal,
+        selectedImage,
+        selectedLocation,
+        +amount,
+        description,
+
+      )
+    );
+    props.navigation.goBack();
 
 
     setIsLoading(false);
-  }, [dispatch, incId, nameVal, selectedImage, description, amount]);
+  }, [dispatch, incId, nameVal, selectedImage,selectedLocation,amount, description]);
 
 
   //new
@@ -97,11 +100,11 @@ const EditIncomeScreen = props => {
   //   props.navigation.goBack();
   // };
   //this is the good one
- 
 
-    useEffect(() => {
-      props.navigation.setParams({ submit: submitHandler });
-    }, [submitHandler]);
+
+  useEffect(() => {
+    props.navigation.setParams({ submit: submitHandler });
+  }, [submitHandler]);
 
   const nameChangeHandler = text => {
     if (text.trim().length === 0) {
@@ -154,7 +157,10 @@ const EditIncomeScreen = props => {
           /> */}
           <ImagePicker onImageTaken={imageTakenHandler} />
           <Text style={styles.label}>Location</Text>
-          <LocationPicker navigation={props.navigation} />
+          <LocationPicker
+            navigation={props.navigation}
+            onLocationPicked={locationPickedHandler}
+          />
         </View>
 
         {/*  this is for not allowing to edit the amount{editedIncome ? null : ( */}
@@ -193,7 +199,7 @@ const EditIncomeScreen = props => {
 //submit button
 EditIncomeScreen.navigationOptions = navData => {
   const submitFn = navData.navigation.getParam('submit');
- return {
+  return {
     //if our function is passed with the id, means that we are in edit, if not it means that we want to add a new income
     headerTitle: 'Add Income'
     ,
@@ -208,7 +214,7 @@ EditIncomeScreen.navigationOptions = navData => {
         />
       </HeaderButtons>
 
- };
+  };
 };
 
 const styles = StyleSheet.create({

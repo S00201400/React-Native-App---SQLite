@@ -10,6 +10,7 @@ import SensibleNavigator from '../React-Native-App/navigation/SensibleNavigator'
 import {init} from '../React-Native-App/helpers/db';
 import inputReducer from '../React-Native-App/store/reducers/incomes';
 
+
 init().then(()=>{
   console.log('Init db');
 })

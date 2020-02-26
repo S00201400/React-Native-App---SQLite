@@ -1,6 +1,6 @@
 import * as SQLite from 'expo-sqlite';
 //creates db at first launch and holds a refferances to my db
-const db = SQLite.openDatabase('inputs.db');
+const db = SQLite.openDatabase('inputs2.db');
 
 //initialize the db and creating a basic tabel
 export const init = () => {
@@ -8,7 +8,7 @@ export const init = () => {
         //creaeting the tabel if doesn t exist
         db.transaction(tx => {
             tx.executeSql(
-                'CREATE TABLE IF NOT EXISTS  inputs1 (id INTEGER PRIMARY KEY NOT NULL, name TEXT NOT NULL, imageURL TEXT NOT NULL, amount INTEGER NOT NULL, description TEXT NOT NULL)',
+                'CREATE TABLE IF NOT EXISTS  inputs (id INTEGER PRIMARY KEY NOT NULL, name TEXT NOT NULL, imageURL TEXT NOT NULL,address TEXT NOT NULL, amount INTEGER NOT NULL, description TEXT NOT NULL)',
                 [],
                 () => {
                     resolve(); //success case
@@ -21,13 +21,13 @@ export const init = () => {
     });
     return promise;
 };
-export const insertInput = (name, imageURL, amount,description) => {
+export const insertInput = (name, imageURL, address, amount, description) => {
     const promise = new Promise((resolve, reject) => {
 
         db.transaction(tx => {
             tx.executeSql(
-                `INSERT INTO inputs1 (name, imageURL, amount, description) VALUES (?, ?, ?, ?);`,
-                [name, imageURL, amount, description],
+                `INSERT INTO inputs (name, imageURL,address, amount, description) VALUES (?, ?,?, ?, ?);`,
+                [name, imageURL, address, amount, description],
                 (_, result) => {
                     resolve(result); //success case
                 },
@@ -46,7 +46,7 @@ export const fetchInputs = () => {
         db.transaction(tx => {
             tx.executeSql(
                 //here you can put a where to select exact what you want
-                'SELECT * FROM inputs1',
+                'SELECT * FROM inputs',
                 [],
                 (_, result) => {
                     resolve(result); //success case
@@ -66,26 +66,26 @@ export const deleteInput = (id) => {
         db.transaction(tx => {
             tx.executeSql(
                 //here you can put a where to select exact what you want
-                `DELETE FROM inputs1 where id=?`,
+                `DELETE FROM inputs where id=?`,
                 [id]
                 ,
                 (_, result) => {
-                   // resolve(result); //success case
+                    // resolve(result); //success case
                     if (results.rowsAffected < 0) {
                         Alert.alert(
-                          'Success',
-                          'User deleted successfully',
-                          [
-                            {
-                              text: 'Ok',
-                            },
-                          ],
-                          { cancelable: false }
+                            'Success',
+                            'User deleted successfully',
+                            [
+                                {
+                                    text: 'Ok',
+                                },
+                            ],
+                            { cancelable: false }
                         );
-                      } else {
+                    } else {
                         alert('Try again!');
-                      }
                     }
+                }
                 ,
                 (_, err) => {
                     reject(err);

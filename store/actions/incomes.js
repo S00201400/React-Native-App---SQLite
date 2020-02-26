@@ -6,15 +6,37 @@
 import * as FileSystem from 'expo-file-system';
 import { insertInput, fetchInputs } from '../../helpers/db';
 import getTextFromImage from "../../components/features/GetTextFromImage";
+import ENV from '../../env';
 export const ADD_INPUT = 'ADD_INPUT';
 export const SET_INPUTS = 'SET_INPUTS';
 export const DELETE_INPUT = 'DELETE_INPUT';
 
 
 
-export const addInput = (name, imageURL,amount, description) => {
- //movin the picture
+export const addInput = (name, imageURL, location, amount, description) => {
+
   return async dispatch => {
+    //geolocation for converting the lat and lng in an address
+    //seding the http request and waiting for the answare
+
+    const response = await fetch(
+      `https://maps.googleapis.com/maps/api/geocode/json?latlng=${
+      location.lat
+      },${location.lng}&key=${ENV.googleApiKey}`
+    );
+
+    if (!response.ok) {
+      throw new Error('Something went wrong!');
+    }
+    const resData = await response.json();
+    if (!resData.results) {
+      throw new Error('Something went wrong!');
+    }
+
+    const address = resData.results[0].formatted_address;
+    const lat=location.lat;
+    const lng=location.lng;
+    //moving the picture
     const fileName = imageURL.split('/').pop();
     const newPath = FileSystem.documentDirectory + fileName;
 
@@ -23,8 +45,8 @@ export const addInput = (name, imageURL,amount, description) => {
         from: imageURL,
         to: newPath
       });
-     const result = await getTextFromImage(name,description,newPath);
-     //male to func
+      const result = await getTextFromImage(name, newPath, address, description);
+      //male to func
       // amount = await result.result;
       // const dbResult = await insertInput(
       //   name,
@@ -64,8 +86,8 @@ export const deleteInput = (id) => {
     try {
       const dbResult = await deleteInput(id);
       console.log(dbResult);
-      dispatch({ type: DELETE_INPUT, id: id});
-    
+      dispatch({ type: DELETE_INPUT, id: id });
+
     } catch (err) {
       throw err;
     }

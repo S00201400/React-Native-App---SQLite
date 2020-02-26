@@ -25,6 +25,7 @@ const IncomeDetailScreen = props => {
             <Image style={styles.image} source={{ uri: selectedIncome.imageURL }} />
              {/* <Text style={styles.amount}>€{selectedIncome.amount}</Text> */}
              <Text style={styles.amount}>€{parseFloat(selectedIncome.amount).toFixed(2)}</Text>
+             <Text style={styles.address}>{selectedIncome.address}</Text>
             <Text style={styles.description}>{selectedIncome.description}</Text> 
         </ScrollView>
     );
@@ -50,10 +51,18 @@ const styles = StyleSheet.create({
         fontFamily: 'open-sans'
     },
     description: {
-        fontSize: 14,
+        fontSize: 20,
         textAlign: 'center',
         marginHorizontal: 20,
-        fontFamily: 'open-sans'
+        fontFamily: 'open-sans',
+    
+    },
+    address:{
+            fontSize: 14,
+          //  textAlign: 'center',
+            marginHorizontal: 20,
+            fontFamily: 'open-sans',
+            marginBottom:20
     }
 });
 

@@ -9,6 +9,8 @@ import * as InputsActions from '../store/actions/incomes';
 import { loadAsync } from 'expo-font';
 import { deleteInput } from '../helpers/db';
 
+
+
 const IncomeOverviewScreen = props => {
 
 
@@ -120,6 +122,7 @@ const IncomeOverviewScreen = props => {
       </View>
     );
   }
+
 
   return <FlatList
     onRefresh={loadInputs}

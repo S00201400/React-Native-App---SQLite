@@ -1,6 +1,6 @@
 import * as SQLite from 'expo-sqlite';
 //creates db at first launch and holds a refferances to my db
-const db = SQLite.openDatabase('inputs3.db');
+const db = SQLite.openDatabase('inputs.db');
 
 //initialize the db and creating a basic tabel
 export const init = () => {
@@ -8,7 +8,7 @@ export const init = () => {
         //creaeting the tabel if doesn t exist
         db.transaction(tx => {
             tx.executeSql(
-                'CREATE TABLE IF NOT EXISTS  inputs1 (id INTEGER PRIMARY KEY NOT NULL, name TEXT NOT NULL, imageURL TEXT NOT NULL,address TEXT NOT NULL, amount INTEGER NOT NULL, description TEXT NOT NULL,lat REAL NOT NULL,lng REAL NOT NULL)',
+                'CREATE TABLE IF NOT EXISTS inputs4 (id INTEGER PRIMARY KEY NOT NULL, name TEXT NOT NULL, imageURL TEXT NOT NULL,address TEXT NOT NULL, amount INTEGER NOT NULL, description TEXT NOT NULL,lat REAL NOT NULL,lng REAL NOT NULL)',
                 [],
                 () => {
                     resolve(); //success case
@@ -26,7 +26,7 @@ export const insertInput = (name, imageURL, address, amount, description,lat,lng
 
         db.transaction(tx => {
             tx.executeSql(
-                `INSERT INTO inputs1 (name, imageURL,address, amount, description,lat,lng) VALUES (?, ?,?, ?, ?,?,?);`,
+                `INSERT INTO inputs4 (name, imageURL,address, amount, description,lat,lng) VALUES (?, ?,?, ?, ?,?,?);`,
                 [name, imageURL, address, amount, description,lat,lng],
                 (_, result) => {
                     resolve(result); //success case
@@ -46,7 +46,7 @@ export const fetchInputs = () => {
         db.transaction(tx => {
             tx.executeSql(
                 //here you can put a where to select exact what you want
-                'SELECT * FROM inputs1',
+                'SELECT * FROM inputs4',
                 [],
                 (_, result) => {
                     resolve(result); //success case
@@ -66,25 +66,27 @@ export const deleteInput = (id) => {
         db.transaction(tx => {
             tx.executeSql(
                 //here you can put a where to select exact what you want
-                `DELETE FROM inputs1 where id=?`,
+                `DELETE FROM inputs4 where id=?`,
                 [id]
                 ,
                 (_, result) => {
-                    // resolve(result); //success case
-                    if (results.rowsAffected < 0) {
-                        Alert.alert(
-                            'Success',
-                            'User deleted successfully',
-                            [
-                                {
-                                    text: 'Ok',
-                                },
-                            ],
-                            { cancelable: false }
-                        );
-                    } else {
-                        alert('Try again!');
-                    }
+                     resolve(result); //success case
+                    // if (result.rowsAffected > 0) {
+                    //     // alert(
+                    //     //     'Success',
+                    //     //     'User deleted successfully',
+                    //     //     [
+                    //     //         {
+                    //     //             text: 'Ok',
+                    //     //         },
+                    //     //     ],
+                    //     //     { cancelable: false }
+                    //     // );
+                    //     resolve(result);
+                    // } else {
+                    //     //alert('Try again!');
+                    //     reject(err);
+                    // }
                 }
                 ,
                 (_, err) => {

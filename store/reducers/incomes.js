@@ -123,8 +123,8 @@ export default (state = initialState, action) => {
 //                 //make sure to not lose any existing state
 //                 ...state,
 //                 // this are the old incomes, we use filter which is a method
-//                 // that turns in a new array, an array that is created buy running a function on 
-//                 // every item in the old array and if that functions return ture we keep that item
+//                 // that turns in a new array, an array that is created by running a function on 
+//                 // every item in the old array and if that functions return true we keep that item
 //                 //and if return false we drop that item
 //                 //keeps all incomes where the id do not match
 //                 userIncomes: state.userIncomes.filter(

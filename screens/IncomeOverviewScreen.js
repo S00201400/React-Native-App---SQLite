@@ -70,7 +70,7 @@ const IncomeOverviewScreen = props => {
           setError(null);
           setIsLoading(true);
           try {
-            await dispatch(InputsActions.deleteInput(id));
+            await dispatch(InputsActions.DeleteInput(id));
             props.navigation.goBack();
           } catch (err) {
             setError(err.message);
@@ -118,7 +118,7 @@ const IncomeOverviewScreen = props => {
   if (!isLoading && inputs.length === 0) {
     return (
       <View style={styles.centered}>
-        <Text>No incomes found. </Text>
+        <Text>No inputs found. </Text>
       </View>
     );
   }

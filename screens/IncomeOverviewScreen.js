@@ -84,7 +84,7 @@ const IncomeOverviewScreen = props => {
   };
 
   const selectItemHandler = (id, name) => {
-    props.navigation.navigate('IncomeDetail', {
+    props.navigation.navigate('InputDetail', {
       inputId: id,
       inputName: name
     });
@@ -160,7 +160,7 @@ const IncomeOverviewScreen = props => {
 //default header title and adding a + button using ionicons
 IncomeOverviewScreen.navigationOptions = navData => {
   return {
-    headerTitle: 'All Incomes',
+    headerTitle: 'List of Inputs',
     headerLeft: () =>
 
       <HeaderButtons HeaderButtonComponent={HeaderButton}>
@@ -180,7 +180,7 @@ IncomeOverviewScreen.navigationOptions = navData => {
           title="Add Input"
           iconName={Platform.OS === 'android' ? 'md-add' : 'ios-add'}
           onPress={() => {
-            navData.navigation.navigate('EditIncome');
+            navData.navigation.navigate('AddInput');
           }}
         />
       </HeaderButtons>

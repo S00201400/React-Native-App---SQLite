@@ -13,7 +13,7 @@ export const DELETE_INPUT = 'DELETE_INPUT';
 
 
 
-export const addInput = (name, imageURL, location, amount, description) => {
+export const addInput = (name, imageURL, location, description) => {
 
   return async dispatch => {
     //geolocation for converting the lat and lng in an address

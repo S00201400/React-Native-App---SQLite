@@ -72,7 +72,7 @@ const EditIncomeScreen = props => {
         nameVal,
         selectedImage,
         selectedLocation,
-        +amount,
+       
         description,
 
       )
@@ -81,7 +81,7 @@ const EditIncomeScreen = props => {
 
 
     setIsLoading(false);
-  }, [dispatch, incId, nameVal, selectedImage,selectedLocation,amount, description]);
+  }, [dispatch, incId, nameVal, selectedImage,selectedLocation, description]);
 
 
   //new
@@ -148,13 +148,6 @@ const EditIncomeScreen = props => {
 
         <View style={styles.formControl}>
           <Text style={styles.label}>Image URL</Text>
-
-          {/* <TextInput
-            style={styles.input}
-            value={imageURL}
-            onChangeText={text => setImageURL(text)}
-            returnKeyType='next'
-          /> */}
           <ImagePicker onImageTaken={imageTakenHandler} />
           <Text style={styles.label}>Location</Text>
           <LocationPicker
@@ -162,18 +155,6 @@ const EditIncomeScreen = props => {
             onLocationPicked={locationPickedHandler}
           />
         </View>
-
-        {/*  this is for not allowing to edit the amount{editedIncome ? null : ( */}
-        <View style={styles.formControl}>
-          <Text style={styles.label}>Amount</Text>
-          <TextInput
-            style={styles.input}
-            value={amount}
-            onChangeText={text => setAmount(text)}
-            keyboardType='default'
-          />
-        </View>
-        {/* )} */}
 
         <View style={styles.formControl}>
           <Text style={styles.label}>Description</Text>
@@ -184,12 +165,6 @@ const EditIncomeScreen = props => {
             returnKeyType='done'
           />
         </View>
-
-        {/* <Button
-          title="Save Place"
-          color={Colors.primary}
-          onPress={submitHandler}
-        /> */}
       </View>
 
     </ScrollView>
@@ -201,7 +176,7 @@ EditIncomeScreen.navigationOptions = navData => {
   const submitFn = navData.navigation.getParam('submit');
   return {
     //if our function is passed with the id, means that we are in edit, if not it means that we want to add a new income
-    headerTitle: 'Add Income'
+    headerTitle: 'Add Input'
     ,
     headerRight: () =>
       <HeaderButtons HeaderButtonComponent={HeaderButton}>

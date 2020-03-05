@@ -19,14 +19,14 @@ const HomeScreen = props => {
       <View style={styles.buttons}>
         <View style={styles.buttonCA}>
           <MainButton onPress={() => {
-            props.navigation.replace({ routeName: 'IncomeOverview' });
+            props.navigation.replace({ routeName: 'InputOverview' });
           }}
           >VIEW INPUTS</MainButton>
         </View>
 
         <View style={styles.buttonL}>
           <MainButton onPress={() => {
-            props.navigation.navigate({ routeName: 'EditIncome' });
+            props.navigation.navigate({ routeName: 'AddInput' });
           }}
           >ADD INPUTS</MainButton>
         </View>

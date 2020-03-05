@@ -38,7 +38,7 @@ const MapScreen = props => {
             // could show an alert!
             return;
         }
-        props.navigation.navigate('EditIncome', { pickedLocation: selectedLocation });
+        props.navigation.navigate('AddInput', { pickedLocation: selectedLocation });
     }, [selectedLocation]);
 
     //this will pass a reference with this param to my headers

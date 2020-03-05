@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "sensibleapp",
-    "slug": "sensibleapp",
+    "name": "Sensible Finance Management",
+    "slug": "sensible-finance-management",
     "privacy": "public",
     "sdkVersion": "36.0.0",
     "platforms": [
@@ -11,9 +11,9 @@
     ],
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/LogoRound.png",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/LogoRound.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -25,6 +25,7 @@
     ],
     "ios": {
       "supportsTablet": true
-    }
+    },
+    "description": ""
   }
 }

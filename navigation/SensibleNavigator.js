@@ -32,9 +32,9 @@ const InputsNavigator = createStackNavigator(
   {
     //the first screen written here is always the first screen that we see
     Home: HomeScreen,
-    IncomeOverview: IncomeOverviewScreen,
-    IncomeDetail: IncomeDetailScreen,
-    EditIncome: EditIncomeScreen,
+    InputOverview: IncomeOverviewScreen,
+    InputDetail: IncomeDetailScreen,
+    AddInput: EditIncomeScreen,
     Map: MapScreen
 
   },
@@ -84,28 +84,31 @@ const InputsNavigator = createStackNavigator(
 // };
 
 //i have to change here - this is the menu
-// const MenuNavigator = createStackNavigator(
-//   {
-//     Home: HomeScreen
-//   },
-//   {
-//     navigationOptions:
-//     {
-//       drawerIcon: drawerConfig =>
-//         <Ionicons
-//           name={Platform.OS === 'android' ? 'md-home' : 'ios-home'}
-//           size={23}
-//           color={drawerConfig.activeTintColor}
-//         />
-//     },
-//     defaultNavigationOptions: defaultNavOptions
-//   }
-// );
+const AddInputNavigator = createStackNavigator(
+  {
+    AddInput: EditIncomeScreen
+  },
+  {
+    navigationOptions:
+    {
+      drawerIcon: drawerConfig =>
+        <Ionicons
+          name={Platform.OS === 'android' ? 'md-create' : 'ios-create'}
+          size={23}
+          color={drawerConfig.activeTintColor}
+        />
+    },
+    //styleing the default header using Platform from react-native which helps us 
+    //to choose something for Android and something else for IOS
+    defaultNavigationOptions: defaultNavOptions
+  }
+);
 
 //combining those 2 stack navigators in a drawer
 const SensibleNavigator = createDrawerNavigator(
   {
     Inputs: InputsNavigator,
+    Add: AddInputNavigator
   },
   {
     contentOptions: {
